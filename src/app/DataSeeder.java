@@ -22,8 +22,8 @@ public final class DataSeeder {
             
             Elections.add(e01);
 
-            Officer oo1 = new Officer("001", "กรรมการผู้ไม่เปิดโพย");
-            Officers.add(oo1);
+            Officer o01 = new Officer("O01", "กรรมการผู้ไม่เปิดโพย");
+            Officers.add(o01);
 
             Candidate c01 = new Candidate("C01", "Null Pointer");
             Candidate c02 = new Candidate("C02", "Merge Conflict");
@@ -57,7 +57,7 @@ public final class DataSeeder {
             Ballot b01 = new Ballot("B01", "V01", ranking_1);
             String[] ranking_2 = {"C01", "C02", "C03"};
             Ballot b02 = new Ballot("B01", "V01", ranking_2);
-            String[] ranking_3 = {"C01", "C02", "C03"};
+            String[] ranking_3 = {"C02", "C03", "C04"};
             Ballot b03 = new Ballot("B01", "V01", ranking_3);
 
             Ballots.add(b01);

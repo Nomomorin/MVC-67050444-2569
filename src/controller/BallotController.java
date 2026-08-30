@@ -15,7 +15,7 @@ public class BallotController {
       }
 
       public Boolean createBallot(String idVoter, String[] ranking){
-            Ballot ballot = new Ballot(""+Ballots.size()+1, idVoter, ranking);
+            Ballot ballot = new Ballot("B"+(Ballots.size()+1), idVoter, ranking);
             Ballots.add(ballot);
             return true;
       }
