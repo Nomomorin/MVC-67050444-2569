@@ -29,6 +29,10 @@ public class Ballot {
         this.status = status;
     }
 
+    public BallotStatus getStatus() {
+        return status;
+    }
+
     
 
 

@@ -98,7 +98,7 @@ public class MainView {
                     electionView.showElection(controller);
                     String eleString = selectView.SelectElection(scanner);
                     controller.closeElection(eleString);
-
+                    controller.CheckBallot();
                     Map<String, Integer> scores = controller.calculateScore();
 
                     for (Map.Entry<String, Integer> entry : scores.entrySet()) {

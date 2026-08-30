@@ -1,10 +1,8 @@
 package app;
 
-import java.util.Arrays;
 import java.util.List;
 
 import model.Ballot;
-import model.BallotStatus;
 import model.Candidate;
 import model.Election;
 import model.ElectionStatus;
@@ -13,15 +11,18 @@ import model.Voter;
 
 public final class DataSeeder {
 
+
+      
+
       public static void seed(
                   List<Ballot> Ballots,
                   List<Candidate> Candidates,
                   List<Election> Elections,
                   List<Officer> Officers,
                   List<Voter> Voters) {
-
+            
             Election e01 = new Election("E01", "การเลือกตั้งประธานชมรมโปร่งใสจริง ๆ นะ", ElectionStatus.OPEN);
-
+            
             Elections.add(e01);
 
             Officer o01 = new Officer("O01", "กรรมการผู้ไม่เปิดโพย");
@@ -54,30 +55,20 @@ public final class DataSeeder {
             Voters.add(v05);
             Voters.add(v06);
             Voters.add(v07);
-
-            String[] ranking_1 = { "C01", "C02", "C03" };
+            
+            String[] ranking_1 = {"C01", "C02", "C03"};
             Ballot b01 = new Ballot("B01", "V01", ranking_1);
-            String[] ranking_2 = { "C01", "C02", "C03" };
+            String[] ranking_2 = {"C01", "C02", "C03"};
             Ballot b02 = new Ballot("B02", "V02", ranking_2);
-            String[] ranking_3 = { "C02", "C03", "C04" };
+            String[] ranking_3 = {"C02", "C03", "C04"};
             Ballot b03 = new Ballot("B03", "V03", ranking_3);
 
-            add_a(Ballots, b01);
-            add_a(Ballots, b02);
-            add_a(Ballots, b03);
+            Ballots.add(b01);
+            Ballots.add(b02);
+            Ballots.add(b03);
 
       }
 
-      public static  void add_a(List<Ballot> Ballots, Ballot ballot) {
-            for (int i = 0; i < Ballots.size(); i++) {
-                  Ballot CheckBallot = Ballots.get(i);
-                  if (Arrays.equals(
-                              CheckBallot.getRanking(),
-                              ballot.getRanking())) {
-                        CheckBallot.setStatus(BallotStatus.PENDING);
-                        ballot.setStatus(BallotStatus.PENDING);
-                  }
-            }
-            Ballots.add(ballot);
-      }
+
+      
 }

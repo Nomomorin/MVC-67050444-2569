@@ -24,8 +24,6 @@ public class VoterController {
             return false;
       }
 
-
-      
       public Voter getVoterByID(String id) {
             for (Voter voter : Voters) {
                   if (voter.getId().equalsIgnoreCase(id)) {

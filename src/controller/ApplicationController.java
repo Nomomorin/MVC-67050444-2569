@@ -79,6 +79,10 @@ public class ApplicationController {
             return ballotController.calculateScore();
       }
 
+      public void CheckBallot(){
+            ballotController.CheckBallot();
+      }
+
 /*       public List<Job> getOpenJobs() {
             List<Job> openJobs = new ArrayList<>();
             for (Job job : jobs) {

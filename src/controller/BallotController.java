@@ -34,17 +34,27 @@ public class BallotController {
             return false;
       }
 
-      public void add(Ballot ballot) {
-            for (int i = 0; i < Ballots.size(); i++) {
-                  Ballot CheckBallot = Ballots.get(i);
-                  if (Arrays.equals(
-                              CheckBallot.getRanking(),
-                              ballot.getRanking())) {
-                        CheckBallot.setStatus(BallotStatus.PENDING);
-                        ballot.setStatus(BallotStatus.PENDING);
+      public void CheckBallot() {
+            for (Ballot ballot : Ballots) {
+                  int count = 0;
+                  for (Ballot checkBallot : Ballots) {
+                        if (Arrays.equals(
+                                    ballot.getRanking(),
+                                    checkBallot.getRanking())) {
+                              count++;
+                        }
+                  }
+                  if (count >= 3) {
+                        for (Ballot checkBallot : Ballots) {
+                              if (Arrays.equals(
+                                          ballot.getRanking(),
+                                          checkBallot.getRanking())) {
+
+                                    checkBallot.setStatus(BallotStatus.PENDING);
+                              }
+                        }
                   }
             }
-            Ballots.add(ballot);
       }
 
       public Map<String, Integer> calculateScore() {
@@ -54,7 +64,9 @@ public class BallotController {
             int[] points = { 3, 2, 1 };
 
             for (Ballot ballot : Ballots) {
-
+                  if (ballot.getStatus() == BallotStatus.PENDING) {
+                        continue;
+                  }
                   String[] ranking = ballot.getRanking();
 
                   for (int i = 0; i < ranking.length; i++) {
