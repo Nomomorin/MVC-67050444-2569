@@ -64,7 +64,7 @@ public class BallotController {
             int[] points = { 3, 2, 1 };
 
             for (Ballot ballot : Ballots) {
-                  if (ballot.getStatus() == BallotStatus.PENDING) {
+                  if (ballot.getStatus() == BallotStatus.PENDING || ballot.getStatus() == BallotStatus.REJECTED) {
                         continue;
                   }
                   String[] ranking = ballot.getRanking();
