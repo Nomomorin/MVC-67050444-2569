@@ -32,5 +32,11 @@ public class ElectionController {
             }
             return false;
       }
+
+      public void closeElection(String id){
+            getElectionByID(id).setStatus(ElectionStatus.CLOSE);
+      }
+
+      
       
 }

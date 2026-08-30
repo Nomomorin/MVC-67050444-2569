@@ -1,8 +1,12 @@
 package view;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import controller.ApplicationController;
+import model.Ballot;
+import model.Election;
 
 public class MainView {
     private final Scanner scanner = new Scanner(System.in);
@@ -85,7 +89,44 @@ public class MainView {
                 }
             } else if (sessionRole == 2) {
                 System.out.println("Officer");
+                System.out.println("1 Close election  : 2 View Status : 3 Review Pending Group");
+                System.out.println("Select Action : ");
+                int choice = scanner.nextInt();
+                if (choice == 1) {
+                    scanner.nextLine();
 
+                    electionView.showElection(controller);
+                    String eleString = selectView.SelectElection(scanner);
+                    controller.closeElection(eleString);
+
+                    Map<String, Integer> scores = controller.calculateScore();
+
+                    for (Map.Entry<String, Integer> entry : scores.entrySet()) {
+                        System.out.println(
+                                entry.getKey() + " = " + entry.getValue() + " point");
+                    }
+                } else if (choice == 2) {
+                    scanner.nextLine();
+                    System.out.println("View Status");
+                    electionView.showElection(controller);
+                    String eleString = selectView.SelectElection(scanner);
+                    Election elect = controller.getElectionByID(eleString);
+                    List<Ballot> ballot = controller.getBallots();
+                    System.out.println("Election Status : " + elect.getStatus());
+                    System.out.println("Number of cards received: " + ballot.size());
+
+                } else if (choice == 3) {
+
+                    System.out.println("Review Pending Group");
+
+                    // 1. แสดงกลุ่ม pending
+                    // 2. รับว่าผู้ใช้เลือกกลุ่มไหน
+                    // 3. รับ decision:
+                    // 1 = approve
+                    // 2 = reject
+                    // 4. ส่งค่าที่เลือกให้ Controller
+
+                }
             }
 
         }

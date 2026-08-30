@@ -28,5 +28,9 @@ public class Election {
         return status;
     }
 
+    public void setStatus(ElectionStatus status) {
+        this.status = status;
+    }
+
 
 }

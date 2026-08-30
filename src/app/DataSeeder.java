@@ -56,9 +56,9 @@ public final class DataSeeder {
             String[] ranking_1 = {"C01", "C02", "C03"};
             Ballot b01 = new Ballot("B01", "V01", ranking_1);
             String[] ranking_2 = {"C01", "C02", "C03"};
-            Ballot b02 = new Ballot("B02", "V01", ranking_2);
+            Ballot b02 = new Ballot("B02", "V02", ranking_2);
             String[] ranking_3 = {"C02", "C03", "C04"};
-            Ballot b03 = new Ballot("B03", "V01", ranking_3);
+            Ballot b03 = new Ballot("B03", "V03", ranking_3);
 
             Ballots.add(b01);
             Ballots.add(b02);

@@ -1,8 +1,8 @@
 package controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
+
 import model.Ballot;
 import model.Candidate;
 import model.Election;
@@ -44,6 +44,11 @@ public class ApplicationController {
             return electionController.getElections();
       }
 
+      public List<Ballot> getBallots(){
+            return ballotController.getBallots();
+      }
+
+
 
       public boolean electioIsOpen(String id){
             return electionController.electioIsOpen(id);
@@ -63,6 +68,15 @@ public class ApplicationController {
 
       public boolean isHaveBallot(String id){
             return ballotController.isHaveBallot(id);
+      }
+
+
+      public void closeElection(String id){
+            electionController.closeElection(id);
+      }
+
+      public Map<String, Integer> calculateScore() {
+            return ballotController.calculateScore();
       }
 
 /*       public List<Job> getOpenJobs() {
