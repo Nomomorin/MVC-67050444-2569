@@ -1,9 +1,11 @@
 package controller;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Ballot;
+import model.BallotStatus;
 import model.Candidate;
 import model.Election;
 import model.Officer;
@@ -15,6 +17,7 @@ public class ApplicationController {
       private List<Officer> Officers;
       private VoterController voterController;
       private CandidateController candidateController;
+
       public ApplicationController(
                   List<Ballot> Ballots,
                   List<Candidate> Candidates,
@@ -32,46 +35,43 @@ public class ApplicationController {
             return voterController.getVoter();
       }
 
-      public List<Candidate> getCandidates(){
+      public List<Candidate> getCandidates() {
             return candidateController.getCandidates();
       }
 
-      public boolean voterIsActive(String id){
+      public boolean voterIsActive(String id) {
             return voterController.isActive(id);
       }
 
-      public List<Election> getElections(){
+      public List<Election> getElections() {
             return electionController.getElections();
       }
 
-      public List<Ballot> getBallots(){
+      public List<Ballot> getBallots() {
             return ballotController.getBallots();
       }
 
-
-
-      public boolean electioIsOpen(String id){
+      public boolean electioIsOpen(String id) {
             return electionController.electioIsOpen(id);
       }
 
-      public Election getElectionByID(String id){
+      public Election getElectionByID(String id) {
             return electionController.getElectionByID(id);
       }
 
-      public boolean createBallot(String idVoter, String[] ranking){
+      public boolean createBallot(String idVoter, String[] ranking) {
             return ballotController.createBallot(idVoter, ranking);
       }
 
-      public Voter getVoterByID(String id){
+      public Voter getVoterByID(String id) {
             return voterController.getVoterByID(id);
       }
 
-      public boolean isHaveBallot(String id){
+      public boolean isHaveBallot(String id) {
             return ballotController.isHaveBallot(id);
       }
 
-
-      public void closeElection(String id){
+      public void closeElection(String id) {
             electionController.closeElection(id);
       }
 
@@ -79,79 +79,16 @@ public class ApplicationController {
             return ballotController.calculateScore();
       }
 
-      public void CheckBallot(){
+      public void CheckBallot() {
             ballotController.CheckBallot();
       }
 
-/*       public List<Job> getOpenJobs() {
-            List<Job> openJobs = new ArrayList<>();
-            for (Job job : jobs) {
-                  if (job.getStatus() == JobStatus.OPEN) {
-                        openJobs.add(job);
-                  }
-            }
-            return openJobs;
+      public List<String> getPendingGroups() {
+            return ballotController.getPendingGroups();
       }
 
-      public Result<Application> apply(String candidateId, String jobId, LocalDate today) {
-            Candidate candidate = findCandidateById(candidateId);
-            if (candidate == null) {
-                  return Result.fail("Candidate not found");
-            }
-
-            Job job = findJobById(jobId);
-            if (job == null) {
-                  return Result.fail("Job not found");
-            }
-
-            if (job.isClosed()) {
-                  return Result.fail("Job is closed");
-            }
-
-            if (job.isDeadlinePassed(today)) {
-                  return Result.fail("Application deadline has passed");
-            }
-
-            if (alreadyApplied(candidateId, jobId)) {
-                  return Result.fail("Already applied");
-            }
-
-            if (!job.isEligible(candidate)) {
-                  return Result.fail("Candidate is not eligible for this job");
-            }
-
-            String applicationId = String.format("A%03d", applications.size() + 1);
-            Application application = new Application(applicationId, candidate, job, today);
-            applications.add(application);
-
-            return Result.success("Application successful", application);
+      public boolean reviewPendingGroup(String selectedGroup,
+                  int decision){
+            return ballotController.reviewPendingGroup(selectedGroup, decision);
       }
-
-      private Candidate findCandidateById(String id) {
-            for (Candidate candidate : candidates) {
-                  if (candidate.getId().equals(id)) {
-                        return candidate;
-                  }
-            }
-            return null;
-      }
-
-      private Job findJobById(String id) {
-            for (Job job : jobs) {
-                  if (job.getId().equals(id)) {
-                        return job;
-                  }
-            }
-            return null;
-      }
-
-      private boolean alreadyApplied(String candidateId, String jobId) {
-            for (Application application : applications) {
-                  if (application.getCandidate().getId().equals(candidateId)
-                              && application.getJob().getId().equals(jobId)) {
-                        return true;
-                  }
-            }
-            return false;
-      } */
 }

@@ -116,15 +116,45 @@ public class MainView {
                     System.out.println("Number of cards received: " + ballot.size());
 
                 } else if (choice == 3) {
+                    scanner.nextLine();
+                    System.out.println("\n=== Review Pending Group ===");
+                    List<String> pendingGroups = controller.getPendingGroups();
+                    if (pendingGroups.isEmpty()) {
+                        System.out.println("No pending group");
+                        continue;
+                    }
+                    for (int i = 0; i < pendingGroups.size(); i++) {
+                        System.out.println(
+                                (i + 1) + ". " + pendingGroups.get(i));
+                    }
+                    System.out.print("Select group: ");
+                    int groupChoice = scanner.nextInt();
+                    scanner.nextLine();
 
-                    System.out.println("Review Pending Group");
+                    if (groupChoice < 1 || groupChoice > pendingGroups.size()) {
+                        System.out.println("Invalid group");
+                        continue;
+                    }
+                    String selectedGroup = pendingGroups.get(groupChoice - 1);
 
-                    // 1. แสดงกลุ่ม pending
-                    // 2. รับว่าผู้ใช้เลือกกลุ่มไหน
-                    // 3. รับ decision:
-                    // 1 = approve
-                    // 2 = reject
-                    // 4. ส่งค่าที่เลือกให้ Controller
+                    System.out.println("1. Accept");
+                    System.out.println("2. Reject");
+                    System.out.print("Decision: ");
+                    int decision = scanner.nextInt();
+                    scanner.nextLine();
+                    if (decision != 1 && decision != 2) {
+                        System.out.println("Invalid decision");
+                        continue;
+                    }
+                    boolean success = controller.reviewPendingGroup(
+                            selectedGroup,
+                            decision);
+
+                    if (success) {
+                        System.out.println("Review completed");
+                    } else {
+                        System.out.println("Cannot review this group");
+                    }
 
                 }
             }

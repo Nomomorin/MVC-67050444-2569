@@ -1,11 +1,10 @@
 package model;
 
-
 public class Ballot {
     private final String id;
     private final String voter_id;
     private String[] ranking;
-    private BallotStatus status = BallotStatus.ACCEPTED;
+    private BallotStatus status = BallotStatus.NOCHECK;
 
     public Ballot(String id, String voter_id, String[] ranking) {
         this.id = id;
@@ -32,8 +31,5 @@ public class Ballot {
     public BallotStatus getStatus() {
         return status;
     }
-
-    
-
 
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +82,48 @@ public class BallotController {
             }
 
             return scores;
+      }
+
+      public List<String> getPendingGroups() {
+            List<String> pendingGroups = new ArrayList<>();
+            for (Ballot ballot : Ballots) {
+                  if (ballot.getStatus() == BallotStatus.PENDING) {
+                        String group = String.join(
+                                    ">",
+                                    ballot.getRanking());
+
+                        if (!pendingGroups.contains(group)) {
+                              pendingGroups.add(group);
+                        }
+                  }
+            }
+            return pendingGroups;
+      }
+
+      public boolean reviewPendingGroup(
+                  String selectedGroup,
+                  int decision) {
+            if (decision != 1 && decision != 2) {
+                  return false;
+            }
+            boolean found = false;
+            for (Ballot ballot : Ballots) {
+                  if (ballot.getStatus() != BallotStatus.PENDING) {
+                        continue;
+                  }
+                  String group = String.join(
+                              ">",
+                              ballot.getRanking());
+                  if (group.equalsIgnoreCase(selectedGroup)) {
+                        found = true;
+                        if (decision == 1 ) {
+                             ballot.setStatus(BallotStatus.ACCEPTED);
+                        }else{
+                              ballot.setStatus(BallotStatus.REJECTED);
+                        }
+                  }
+            }
+            return found;
       }
 
 }
