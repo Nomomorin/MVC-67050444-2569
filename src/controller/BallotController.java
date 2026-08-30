@@ -1,10 +1,12 @@
 package controller;
 
 import java.util.List;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import model.Ballot;
+import model.BallotStatus;
 
 public class BallotController {
       private List<Ballot> Ballots;
@@ -32,6 +34,19 @@ public class BallotController {
             return false;
       }
 
+      public void add(Ballot ballot) {
+            for (int i = 0; i < Ballots.size(); i++) {
+                  Ballot CheckBallot = Ballots.get(i);
+                  if (Arrays.equals(
+                              CheckBallot.getRanking(),
+                              ballot.getRanking())) {
+                        CheckBallot.setStatus(BallotStatus.PENDING);
+                        ballot.setStatus(BallotStatus.PENDING);
+                  }
+            }
+            Ballots.add(ballot);
+      }
+
       public Map<String, Integer> calculateScore() {
 
             Map<String, Integer> scores = new HashMap<>();
@@ -39,8 +54,6 @@ public class BallotController {
             int[] points = { 3, 2, 1 };
 
             for (Ballot ballot : Ballots) {
-
-
 
                   String[] ranking = ballot.getRanking();
 
