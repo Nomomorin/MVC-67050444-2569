@@ -33,26 +33,44 @@ public class MainView {
                 voterView.showVoter(controller);
                 sessionIdLogin = selectView.LoginVoter(scanner);
                 if (controller.isHaveBallot(sessionIdLogin)) {
-                    return;
+                    System.out.println("ลงคะแนนแล้ว");
+                    continue;
                 }
                 if (!(controller.voterIsActive(sessionIdLogin))) {
-                    return;
+                    System.out.println("Voter is not active");
+                    continue;
                 }
                 electionView.showElection(controller);
                 sessionIdElection = selectView.SelectElection(scanner);
                 if (!(controller.electioIsOpen(sessionIdElection))) {
-                    return;
+                    System.out.println("Election is not open");
+                    continue;
                 }
                 candidateView.showCandidates(controller);
-                String[] vote = new String[3];
+                String[] vote = { "", "", "" };
                 System.out.println("\nVoters:");
+                boolean invalidVote = false;
                 for (int i = 1; i < vote.length + 1; i++) {
-                    System.out.println("\n No." + i + " Select id candidate: ");
+                    System.out.println(
+                            "\n No." + i + " Select id candidate: ");
                     String p_vote = scanner.nextLine().trim();
-                    if (vote[0].equalsIgnoreCase(p_vote) || vote[1].equalsIgnoreCase(p_vote) || vote[2].equalsIgnoreCase(p_vote)){
-                        return;
+
+                    boolean duplicate = false;
+                    for (int j = 0; j < i - 1; j++) {
+                        if (vote[j].equalsIgnoreCase(p_vote)) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    if (duplicate) {
+                        System.out.println("Candidate must be different");
+                        invalidVote = true;
+                        break;
                     }
                     vote[i - 1] = p_vote;
+                }
+                if (invalidVote) {
+                    continue;
                 }
                 boolean s = controller.createBallot(sessionIdLogin, vote);
                 if (s) {
